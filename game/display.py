@@ -6,6 +6,7 @@ import time
 import random
 import change_tuple
 import movement
+import spawn
 
 
 
@@ -23,6 +24,7 @@ class Display:
         pygame.display.set_caption("Game")
         fpsclock = pygame.time.Clock()
         draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
+        spawn.Spawn_food(display)
         while True:
             fpsclock.tick(60)
             display.fill([0,0,0])
