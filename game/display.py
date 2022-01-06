@@ -52,40 +52,6 @@ class Display:
 
                 pygame.display.update()
 
-# class Movement:
-#     def __init__(self, display, player, xy):
-#         self.display = display
-#         self.player = player
-#         self.x = xy
-#
-#     def control_x(self):
-#         rec_color = [255, 0, 0]
-#         rect_x = pygame.draw.rect(self.display, rec_color, pygame.Rect(0, 0, 5, self.display.get_height()))
-#         rect_minusx = pygame.draw.rect(self.display, rec_color,
-#                                        pygame.Rect(self.display.get_width() - 5, 0, 5, self.display.get_height()))
-#         collide_x = self.player.colliderect(rect_x)
-#         collide_minusx = self.player.colliderect(rect_minusx)
-#         if collide_x:
-#             self.x += 5
-#             return self.x
-#         elif collide_minusx:
-#             self.x -= 5
-#             return self.x
-#         return self.x
-#
-#     def control_y(self):
-#         re_color = [0, 255, 0]
-#         rect_y = pygame.draw.rect(self.display, re_color, pygame.Rect(0, 0, self.display.get_width(), 5))
-#         rect_minusy = pygame.draw.rect(self.display, re_color, pygame.Rect(0, self.display.get_height() - 5, self.display.get_width(), 5))
-#         collide_y = self.player.colliderect(rect_y)
-#         collide_minusy = self.player.colliderect(rect_minusy)
-#         if collide_y:
-#             self.x += 5
-#             return self.x
-#         elif collide_minusy:
-#             self.x -= 5
-#             return self.x
-#         return self.x
 
 
 Display(250, 250).window()
