@@ -24,7 +24,7 @@ class Display:
         pygame.display.set_caption("Game")
         fpsclock = pygame.time.Clock()
         draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
-        spawn.Spawn_food(display)
+        t = 5
         while True:
             fpsclock.tick(60)
             display.fill([0,0,0])
@@ -49,11 +49,14 @@ class Display:
                 self.x = movement.Movement(self.max_x, draw_player, self.x, "x").move()
                 self.y = movement.Movement(self.max_y, draw_player, self.y, "y").move()
                 display.blit(player_texture, (self.x, self.y, 50, 50))
+                if t > 0:
+                    time.sleep(1)
+                    spawn.Spawn_food(display, draw_player).food()
 
                 pygame.display.flip()
 
                 pygame.display.update()
-
+                t -= 1
 
 
 Display(250, 250).window()
