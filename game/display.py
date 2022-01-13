@@ -29,10 +29,14 @@ class Display:
         apple_x = random.randrange(99, display.get_width())
         apple_y = random.randrange(99, display.get_height())
         pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 5, 5))
+        font = pygame.font.Font('freesansbold.ttf', 32)
+
+
         while True:
             fpsclock.tick(60)
             display.fill([0,0,0])
             keys = pygame.key.get_pressed()
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     return
@@ -55,7 +59,14 @@ class Display:
                 draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
                 print (f"{self.score}")
 
+                #score code
+                text = font.render(f'Score: {self.score}', True, [255, 0, 0])
+                textRect = text.get_rect()
+                display.blit(text, textRect)
                 pygame.display.flip()
+                #end of score code
+
+
                 apple = pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
                 if draw_player.colliderect(apple):
                     self.score += 1
