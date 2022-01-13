@@ -24,8 +24,11 @@ class Display:
         pygame.display.set_caption("Game")
         fpsclock = pygame.time.Clock()
         draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
-        t = 5
+        apple_x = random.randrange(99, display.get_width())
+        apple_y = random.randrange(99, display.get_height())
+        pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 5, 5))
         while True:
+
             fpsclock.tick(60)
             display.fill([0,0,0])
             keys = pygame.key.get_pressed()
@@ -48,15 +51,16 @@ class Display:
                         self.x -= self.step
                 self.x = movement.Movement(self.max_x, draw_player, self.x, "x").move()
                 self.y = movement.Movement(self.max_y, draw_player, self.y, "y").move()
-                display.blit(player_texture, (self.x, self.y, 50, 50))
-                if t > 0:
-                    time.sleep(1)
-                    spawn.Spawn_food(display, draw_player).food()
+                draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
+
 
                 pygame.display.flip()
-
+                apple = pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
+                if draw_player.colliderect(apple):
+                    apple_x = random.randrange(99, display.get_width())
+                    apple_y = random.randrange(99, display.get_height())
+                    apple = pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
                 pygame.display.update()
-                t -= 1
 
 
 Display(250, 250).window()
