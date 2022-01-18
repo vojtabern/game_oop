@@ -6,7 +6,7 @@ import time
 import random
 import change_tuple
 import movement
-import spawn
+
 import pygame.freetype
 
 
@@ -26,9 +26,9 @@ class Display:
         pygame.display.set_caption("Game")
         fpsclock = pygame.time.Clock()
         draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
-        apple_x = random.randrange(99, display.get_width())
-        apple_y = random.randrange(99, display.get_height())
-        pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 5, 5))
+        apple_x = random.randrange(99, self.max_x-50)
+        apple_y = random.randrange(99, self.max_y-50)
+        #pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 5, 5))
         font = pygame.font.Font('freesansbold.ttf', 32)
 
 
@@ -57,7 +57,7 @@ class Display:
                 self.x = movement.Movement(self.max_x, draw_player, self.x, "x").move()
                 self.y = movement.Movement(self.max_y, draw_player, self.y, "y").move()
                 draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
-                print (f"{self.score}")
+                print(f"{self.score}")
 
                 #score code
                 text = font.render(f'Score: {self.score}', True, [255, 0, 0])
@@ -66,14 +66,31 @@ class Display:
                 pygame.display.flip()
                 #end of score code
 
-
+                #start of spawn code
                 apple = pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
                 if draw_player.colliderect(apple):
                     self.score += 1
-                    apple_x = random.randrange(107, display.get_width())
-                    apple_y = random.randrange(107, display.get_height())
+                    apple_x = random.randrange(107, self.max_x-50)
+                    apple_y = random.randrange(107, self.max_y-50)
                     apple = pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
                 pygame.display.update()
 
+# class spawn:
+#     def __init__(self, max_x, max_y, score, display, player):
+#         self.max_x = max_x
+#         self.max_y = max_y
+#         self.score = score
+#         self.display = display
+#         self.player = player
+#     def food(self):
+#         apple_x = random.randrange(107, self.max_x - 50)
+#         apple_y = random.randrange(107, self.max_y - 50)
+#         apple = pygame.draw.rect(self.display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
+#
+#         if self.player.colliderect(apple):
+#             self.score += 1
+#             apple_x = random.randrange(107, self.max_x - 50)
+#             apple_y = random.randrange(107, self.max_y - 50)
+#             return pygame.draw.rect(self.display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
 
 Display(250, 250).window()
