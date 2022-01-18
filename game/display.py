@@ -42,32 +42,39 @@ class Display:
                 if event.type == pygame.QUIT:
                     return
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
+                    if event.key == pygame.K_ESCAPE or \
+                            movement.Movement(self.max_y, draw_player, self.y, "y").control_y(self.vector)==False \
+                            or movement.Movement(self.max_x, draw_player, self.x, "x").control_x(self.vector)==False:
+                        print(f"you have achieved {self.score} score. ")
                         pygame.quit()
                         return
 
                 elif keys:
                     if keys[pygame.K_w] and self.vector != 's':
-                        self.y = self.y - 1
-                        self.x = self.x + 0
+                        if self.vector != 'w':
+                            self.y = self.y - 1
+                            self.x = self.x + 0
                         self.vector = 'w'
                         continue
                         #self.y -= self.step
                     if keys[pygame.K_s] and self.vector != 'w':
-                        self.y = self.y +1
-                        self.x = self.x + 0
+                        if self.vector != 's':
+                            self.y = self.y +1
+                            self.x = self.x + 0
                         self.vector = 's'
                         continue
                         #self.y += self.step
                     if keys[pygame.K_d] and self.vector != 'a':
-                        self.y = self.y + 0
-                        self.x = self.x + 1
+                        if self.vector != 'd':
+                            self.y = self.y + 0
+                            self.x = self.x + 1
                         self.vector = 'd'
                         continue
                         #self.x += self.step
                     if keys[pygame.K_a] and self.vector != 'd':
-                        self.y = self.y + 0
-                        self.x = self.x -1
+                        if self.vector != 'a':
+                            self.y = self.y + 0
+                            self.x = self.x - 1
                         self.vector = 'a'
                         continue
                         #self.x -= self.step
@@ -85,11 +92,8 @@ class Display:
                 self.y = self.y + 0
                 self.x = self.x - 1
 
-
-            #snake_body = body.Create_body(self.track, self.score, 0)
-            #print(snake_body)
-            self.x = movement.Movement(self.max_x, draw_player, self.x, "x").move()
-            self.y = movement.Movement(self.max_y, draw_player, self.y, "y").move()
+            # self.x = movement.Movement(self.max_x, draw_player, self.x, "x").move()
+            # self.y = movement.Movement(self.max_y, draw_player, self.y, "y").move()
             draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
             print(f"{self.score}")
 

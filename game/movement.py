@@ -15,14 +15,13 @@ class Movement():
         if self.axis == "x":
             if self.xy + 107 >= self.display:
                 self.xy = self.xy - self.step
-                #change_tuple.Vector2[0].__add__(-5)
 
+                #change_tuple.Vector2[0].__add__(-5)
                 return self.xy
             elif self.xy <= 0:
                 self.xy = self.xy + self.step
                 #change_tuple.Vector2[0].__add__(5)
                 return self.xy
-    #def move_y(self):
         elif self.axis == "y":
             if self.xy+99 >= self.display:
                 self.xy = self.xy - self.step
@@ -33,5 +32,18 @@ class Movement():
                 return self.xy
         return self.xy
 
+    def control_x(self, vector):
+        if self.axis == "x":
+            if self.xy + 111 >= self.display and vector == 'd':
+                return False
+            elif self.xy - 4 <= 0 and vector == 'a':
+                return False
+        return True
 
-
+    def control_y(self, vector):
+        if self.axis == "y":
+            if self.xy + 103 > self.display and vector == 's':
+                return False
+            elif self.xy - 9 <= 0 and vector == 'w':
+                return False
+        return True
