@@ -1,3 +1,5 @@
+
+
 import keyword
 
 import pygame
@@ -20,17 +22,15 @@ class Display:
         self.max_y = 500
         self.score = 0
         self.vector = 'd'
-        #self.track = [(1000 //1, 500 //2)]
     def window(self):
         pygame.init()
         display = pygame.display.set_mode((self.max_x, self.max_y))
-        player_texture = pygame.image.load("toast.png")
+        player_texture= pygame.image.load("toast.png")
         pygame.display.set_caption("Game")
         fpsclock = pygame.time.Clock()
-        draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
+        #draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
         apple_x = random.randrange(99, self.max_x-50)
         apple_y = random.randrange(99, self.max_y-50)
-        #pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 5, 5))
         font = pygame.font.Font('freesansbold.ttf', 32)
 
         while True:
@@ -42,8 +42,7 @@ class Display:
                 if event.type == pygame.QUIT:
                     return
                 elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE or \
-                            movement.Movement(self.max_y, draw_player, self.y, "y").control_y(self.vector)==False \
+                    if event.key == pygame.K_ESCAPE or movement.Movement(self.max_y, draw_player, self.y, "y").control_y(self.vector)==False\
                             or movement.Movement(self.max_x, draw_player, self.x, "x").control_x(self.vector)==False:
                         print(f"you have achieved {self.score} score. ")
                         pygame.quit()
@@ -94,7 +93,7 @@ class Display:
 
             # self.x = movement.Movement(self.max_x, draw_player, self.x, "x").move()
             # self.y = movement.Movement(self.max_y, draw_player, self.y, "y").move()
-            draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
+            draw_player = display.blit(player_texture, [self.x, self.y, 50, 50])
             print(f"{self.score}")
 
 
