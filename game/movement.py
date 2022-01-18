@@ -16,6 +16,7 @@ class Movement():
             if self.xy + 107 >= self.display:
                 self.xy = self.xy - self.step
                 #change_tuple.Vector2[0].__add__(-5)
+
                 return self.xy
             elif self.xy <= 0:
                 self.xy = self.xy + self.step
