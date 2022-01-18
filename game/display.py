@@ -19,6 +19,7 @@ class Display:
         self.max_x = 1000
         self.max_y = 500
         self.score = 0
+        self.vector = 'd'
     def window(self):
         pygame.init()
         display = pygame.display.set_mode((self.max_x, self.max_y))
@@ -31,7 +32,7 @@ class Display:
         #pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 5, 5))
         font = pygame.font.Font('freesansbold.ttf', 32)
 
-
+        dir = (1, 0)
         while True:
             fpsclock.tick(60)
             display.fill([0,0,0])
@@ -45,35 +46,63 @@ class Display:
                         pygame.quit()
                         return
 
+
                 elif keys:
                     if keys[pygame.K_w]:
-                        self.y -= self.step
+                        self.y = self.y - 1
+                        self.x = self.x + 0
+                        self.vector = 'w'
+                        #self.y -= self.step
                     if keys[pygame.K_s]:
-                        self.y += self.step
+                        self.y = self.y +1
+                        self.x = self.x + 0
+                        self.vector = 's'
+                        #self.y += self.step
                     if keys[pygame.K_d]:
-                        self.x += self.step
+                        self.y = self.y + 0
+                        self.x = self.x + 1
+                        self.vector = 'd'
+                        #self.x += self.step
                     if keys[pygame.K_a]:
-                        self.x -= self.step
-                self.x = movement.Movement(self.max_x, draw_player, self.x, "x").move()
-                self.y = movement.Movement(self.max_y, draw_player, self.y, "y").move()
-                draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
-                print(f"{self.score}")
+                        self.y = self.y + 0
+                        self.x = self.x -1
+                        self.vector = 'a'
+                        #self.x -= self.step
 
-                #score code
-                text = font.render(f'Score: {self.score}', True, [255, 0, 0])
-                textRect = text.get_rect()
-                display.blit(text, textRect)
-                pygame.display.flip()
+            if self.vector == 'w':
+                self.y = self.y - 1
+                self.x = self.x + 0
+            elif self.vector == 's':
+                self.y = self.y + 1
+                self.x = self.x + 0
+            elif self.vector == 'd':
+                self.y = self.y + 0
+                self.x = self.x + 1
+            elif self.vector == 'a':
+                self.y = self.y + 0
+                self.x = self.x - 1
+
+            self.x = movement.Movement(self.max_x, draw_player, self.x, "x").move()
+            self.y = movement.Movement(self.max_y, draw_player, self.y, "y").move()
+            #draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
+            draw_player = display.blit(player_texture, (self.x, self.y, 50, 50))
+            print(f"{self.score}")
+
+            #score code
+            text = font.render(f'Score: {self.score}', True, [255, 0, 0])
+            textRect = text.get_rect()
+            display.blit(text, textRect)
+            pygame.display.flip()
                 #end of score code
 
                 #start of spawn code
+            apple = pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
+            if draw_player.colliderect(apple):
+                self.score += 1
+                apple_x = random.randrange(107, self.max_x-50)
+                apple_y = random.randrange(107, self.max_y-50)
                 apple = pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
-                if draw_player.colliderect(apple):
-                    self.score += 1
-                    apple_x = random.randrange(107, self.max_x-50)
-                    apple_y = random.randrange(107, self.max_y-50)
-                    apple = pygame.draw.rect(display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
-                pygame.display.update()
+            pygame.display.update()
 
 # class spawn:
 #     def __init__(self, max_x, max_y, score, display, player):
