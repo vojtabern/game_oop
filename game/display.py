@@ -52,21 +52,25 @@ class Display:
                         self.y = self.y - 1
                         self.x = self.x + 0
                         self.vector = 'w'
+                        continue
                         #self.y -= self.step
                     if keys[pygame.K_s]:
                         self.y = self.y +1
                         self.x = self.x + 0
                         self.vector = 's'
+                        continue
                         #self.y += self.step
                     if keys[pygame.K_d]:
                         self.y = self.y + 0
                         self.x = self.x + 1
                         self.vector = 'd'
+                        continue
                         #self.x += self.step
                     if keys[pygame.K_a]:
                         self.y = self.y + 0
                         self.x = self.x -1
                         self.vector = 'a'
+                        continue
                         #self.x -= self.step
 
             if self.vector == 'w':
