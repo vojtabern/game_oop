@@ -1,5 +1,6 @@
 import math
 
+"""Zbytecna funkce, jen jsem se s ni delal, treba ji nekdy vyuziju"""
 
 class Vector2(tuple):
     def __new__(cls, x, y):
