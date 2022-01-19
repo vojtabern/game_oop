@@ -1,7 +1,8 @@
-import pygame
-#import display
-import change_tuple
 
+
+"""
+Tato funkce se stara o kolize s krajem obrazovky a při kolizi poté vypne hru
+"""
 
 class Movement():
     def __init__(self,display, player, xy, axis, width, height):
@@ -19,16 +20,13 @@ class Movement():
             if self.xy + self.width >= self.display:
                 self.xy = self.xy - self.step
 
-                #change_tuple.Vector2[0].__add__(-5)
                 return self.xy
             elif self.xy <= 0:
                 self.xy = self.xy + self.step
-                #change_tuple.Vector2[0].__add__(5)
                 return self.xy
         elif self.axis == "y":
             if self.xy+self.height >= self.display:
                 self.xy = self.xy - self.step
-                #change_tuple.Vector2[1].__add__(-5)
                 return self.xy
             elif self.xy - 5 <= 0:
                 self.xy = self.xy + self.step
@@ -47,6 +45,6 @@ class Movement():
         if self.axis == "y":
             if self.xy + self.height + 4 > self.display and vector == 's':
                 return False
-            elif self.xy -19 <= 0 and vector == 'w':
+            elif self.xy - 19 <= 0 and vector == 'w':
                 return False
         return True

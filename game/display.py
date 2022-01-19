@@ -4,7 +4,9 @@ import random
 import movement
 import pygame.freetype
 
-
+"""
+Hlavni funkce, zarizuje hlavni funkce cele hry (pohyb, vykresleni obrazovky, fps)
+"""
 
 class Display:
     def __init__(self, x, y):
@@ -98,12 +100,13 @@ class Display:
             else:
                 text = font.render(f'Score: {self.score}', True, [255, 0, 0])
                 textRect = text.get_rect()
-
-            pygame.display.flip()
-
             display.blit(text, textRect)
 
+
+
+
             apple = Spawn_food(display, self.max_x, self.max_y).draw(apple_x, apple_y)
+            pygame.display.flip()
             if Eat(draw_player, apple).collision():
                 self.score += 1
                 if self.max_y > self.height and self.max_x > self.width:
@@ -115,6 +118,8 @@ class Display:
             self.y = movement.Movement(self.max_y, draw_player, self.y, "y", self.width, self.height).move()
             pygame.display.update()
 
+
+"Funkce starajici se o spawn jidla"
 
 class Spawn_food:
     def __init__(self, display, max_x, max_y):
@@ -134,7 +139,9 @@ class Spawn_food:
         apple = pygame.draw.rect(self.display, [255, 0, 0], pygame.Rect(apple_x, apple_y, 50, 50))
         return apple
 
-
+"""
+Funkce starajici se o kolizi hrace s hadem
+"""
 class Eat:
     def __init__(self, draw_player, apple):
         self.apple = apple
